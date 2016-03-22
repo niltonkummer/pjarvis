@@ -4,24 +4,27 @@
 
 <!-- Javascript -->
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="bootstrap/js/jquery.backstretch.min.js"></script>
 <script src="bootstrap/js/login.js"></script>
+
+
 
 
 <script language="javascript">
   function valida_campos(){
     
     if (document.login_form.username.value == ""){
-      alert("Digite o seu username.");
-      login_form.Username.focus();
-      return false;
+
+        $(".alert.alert-warning").html("<strong>Atenção!</strong> Digite o seu username.").stop().fadeIn("fast").delay(3000).fadeOut("fast");
+        $("[name=username").focus();
+        return false;
     }
     if (document.login_form.password.value == ""){
-      alert("Digite a sua senha.");
-      login_form.password.focus();
-      return false;
+        $(".alert.alert-warning").html("<strong>Atenção!</strong> Digite a sua senha.").stop().fadeIn("fast").delay(3000).fadeOut("fast");
+        $("[name=password").focus();
+        return false;
     }
     return true;
   }
@@ -45,6 +48,7 @@
   <div class="modal-content">
       <div class="modal-header">
           <h1 class="text-center">Project J Login</h1>
+          <div class="alert alert-warning" style="display: none"></div>
       </div>
       <div class="modal-body">
           <form name ="login_form" class="form col-md-12 center-block">
