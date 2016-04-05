@@ -17,6 +17,15 @@
         }
     </style>
     <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jquery.backstretch.min.js"></script>
+    <script src="bootstrap/js/login.js"></script>
+    <style>
+        body {
+            font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+    </style>
     <script type="text/javascript">
         // When the WINDOW is ready, initialize. We are going with
         // the window load rather than the document so that we
@@ -28,17 +37,18 @@
 
         $( window ).load(function(){
             var partes = [
-                {width: 165, height: 173, top: 105, left: 80}, // quarto
-                {width: 131, height: 117, top: 105, left: 251}, // sala
-                {width: 212, height: 173, top: 105, left: 388}, // quarto 2
-                {width: 212, height: 287, top: 286, left: 388}, // garagem
-                {width: 306, height: 146, top: 425, left: 80}, // sala
-                {width: 306, height: 133, top: 285, left: 80} // cozinha
+                {titulo: "Quarto", width: 165, height: 173, top: 105, left: 80}, // quarto
+                {titulo: "Sala", width: 131, height: 117, top: 105, left: 251}, // sala
+                {titulo: "Quarto 2",width: 212, height: 173, top: 105, left: 388}, // quarto 2
+                {titulo: "Garagem",width: 212, height: 287, top: 286, left: 388}, // garagem
+                {titulo: "Sala",width: 306, height: 146, top: 425, left: 80}, // sala
+                {titulo: "Cozinha",width: 306, height: 133, top: 285, left: 80} // cozinha
             ]
 
             var isZoom = false;
             var view = $( "#view" );
             var image = $( "#image" );
+            var title = $( "#title" );
 
             view.width(image.width());
             view.height(image.height());
@@ -53,6 +63,9 @@
                 zoomPart.height(partes[parte].height);
                 zoomPart.css("top", partes[parte].top);
                 zoomPart.css("left", partes[parte].left);
+                zoomPart.data(
+                    {title: partes[parte].titulo}
+                )
                 // zoomRoom.css("border", "1px solid #000");
                 thisZoom = zoomPart
                 zoomPart.hover(function (event) {
@@ -81,10 +94,12 @@
                         //event.preventDefault();
                         if (isZoom) {
                             isZoom = false;
+                            title.text("");
                             resetZoom();
                         } else {
                             isZoom = true;
 
+                            title.text($(event.currentTarget).data().title);
                             // Let's pass the position of the zoom box
                             // off to the function that is responsible
                             // for zooming the image.
@@ -178,10 +193,15 @@
     </script>
 </head>
 <body>
+<div style="width: 680px;">
+    <div style="position: absolute; width: 680px; z-index: 1000; background-color: #1c94c4;">
+        <h1 id="title" style="text-align: center"></h1>
+    </div>
 
-<div id="view">
-    <img id="image" src="./planta.jpg" width="680" />
-</div>
+    <div id="view">
+        <img id="image" src="./planta.jpg" width="680" />
 
+    </div>
+    </div>
 </body>
 </html>
