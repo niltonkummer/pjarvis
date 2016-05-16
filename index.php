@@ -51,7 +51,7 @@
           <div class="alert alert-warning" style="display: none"></div>
       </div>
       <div class="modal-body">
-          <form name ="login_form" class="form col-md-12 center-block">
+          <form name ="login_form" class="form col-md-12 center-block" method="POST" action="login.php">
             <div class="form-group">
               <input type="text" name="username" class="form-control input-lg" placeholder="Username">
             </div>
